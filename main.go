@@ -27,7 +27,9 @@ func run(in io.Reader, out io.Writer) {
 	i, p := 0, 0
 	for {
 		c := str[p]
-		if c == ',' {
+		if c == ' ' {
+			str = str[:p] + str[p+1:]
+		} else if c == ',' {
 			fmt.Fprintln(out, tab(i)+str[0:p+1])
 			str = str[p+1:]
 			p = 0
@@ -41,13 +43,15 @@ func run(in io.Reader, out io.Writer) {
 			str = str[p:]
 			p = 0
 			i--
+			p++
 			if len(str) == 1 {
 				// data class なので最後は必ず ')' になるはず
 				fmt.Fprintln(out, str)
 				break
 			}
+		} else {
+			p++
 		}
-		p++
 	}
 }
 
