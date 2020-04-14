@@ -45,16 +45,16 @@ func run(in io.Reader, out io.Writer) {
 		if c == ' ' {
 			str = str[:p] + str[p+1:]
 		} else if c == ',' {
-			fmt.Fprintln(out, tab(i)+str[0:p+1])
+			fmt.Fprintln(out, tab(i)+str[:p+1])
 			str = str[p+1:]
 			p = 0
 		} else if c == '(' || c == '[' {
-			fmt.Fprintln(out, tab(i)+str[0:p+1])
+			fmt.Fprintln(out, tab(i)+str[:p+1])
 			str = str[p+1:]
 			p = 0
 			i++
 		} else if c == ')' || c == ']' {
-			fmt.Fprintln(out, tab(i)+str[0:p])
+			fmt.Fprintln(out, tab(i)+str[:p])
 			str = str[p:]
 			p = 0
 			i--
