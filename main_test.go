@@ -37,4 +37,12 @@ var tests = []struct {
 )
 `,
 	},
+	{
+		`foo(aaa="hoge(fuga=123.45, piyo=234.56)", bbb=null)`,
+		`foo(
+  aaa="hoge(fuga=123.45, piyo=234.56)",
+  bbb=null
+)
+`,
+	},
 }

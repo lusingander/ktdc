@@ -25,8 +25,23 @@ func run(in io.Reader, out io.Writer) {
 	str := scan(in)
 
 	i, p := 0, 0
+	onString := false
 	for {
 		c := str[p]
+		if c == '"' {
+			if onString {
+				onString = false
+			} else {
+				onString = true
+			}
+			p++
+			continue
+		}
+		if onString {
+			p++
+			continue
+		}
+
 		if c == ' ' {
 			str = str[:p] + str[p+1:]
 		} else if c == ',' {
